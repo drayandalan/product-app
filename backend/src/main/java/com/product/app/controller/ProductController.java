@@ -28,8 +28,8 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public Page<Product> byPrice(@RequestParam(name = "min") BigDecimal min,
-                                 @RequestParam(name = "max") BigDecimal max,
+    public Page<Product> byPrice(@RequestParam(name = "min", defaultValue = "0") BigDecimal min,
+                                 @RequestParam(name = "max", defaultValue = "9999999") BigDecimal max,
                                  @RequestParam(name = "page", defaultValue = "0") Integer page,
                                  @RequestParam(name = "size", defaultValue = "10") Integer size) {
         return service.byPrice(min, max, page, size);
