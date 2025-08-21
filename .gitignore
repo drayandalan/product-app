@@ -1,0 +1,77 @@
+# ==============================
+# Global ignores
+# ==============================
+*.log
+*.tmp
+*.swp
+*.DS_Store
+node_modules/
+dist/
+target/
+out/
+
+
+# ==============================
+# Backend ignores
+# ==============================
+# Maven build output
+backend/target/
+
+# IDE stuff
+backend/.idea/
+backend/*.iml
+backend/*.ipr
+backend/*.iws
+backend/.vscode/
+
+# OS files
+backend/.DS_Store
+backend/Thumbs.db
+
+# Logs
+backend/*.log
+
+# Env & security
+backend/*.env
+backend/*.env.local
+backend/application-*.yml
+backend/application-*.properties
+
+# JVM crash logs
+backend/hs_err_pid*
+backend/replay_pid*
+
+# ==============================
+# Frontend ignores
+# ==============================
+# Node dependencies
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/.vite/
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# IDE stuff
+frontend/.idea/
+frontend/.vscode/
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sln
+frontend/*.sw?
+
+# OS files
+frontend/.DS_Store
+frontend/Thumbs.db
+
+# Env files
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local

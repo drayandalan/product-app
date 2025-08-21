@@ -1,0 +1,26 @@
+# Maven build output
+/target/
+
+# IDE stuff
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Env & security
+*.env
+*.env.local
+application-*.yml
+application-*.properties
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
