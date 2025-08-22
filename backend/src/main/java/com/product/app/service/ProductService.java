@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,22 +25,22 @@ public class ProductService {
 
     @Cacheable(
             cacheNames = "products",
-            key = "'list|p=' + #a1 + '|s=' + #a2 + '|n=' + (#a0 == null ? '' : #a0.trim().toLowerCase())"
+            key = "'list|p=' + #a1 + '|s=' + #a2 + '|o=' + #a3 + '|n=' + (#a0 == null ? '' : #a0.trim().toLowerCase())"
     )
-    public Page<Product> list(String name, Integer page, Integer size) {
+    public Page<Product> list(String name, Integer page, Integer size, Boolean ordered) {
         PageRequest pr = PageRequest.of(page, size);
         return (name == null || name.isBlank())
-                ? repo.findAll(pr)
+                ? ordered ? repo.findAllByOrderByPriceDesc(pr) : repo.findAll(pr)
                 : repo.findByNameContainingIgnoreCase(name.trim(), pr);
     }
 
     @Cacheable(
             cacheNames = "products",
-            key = "'price|p=' + #a2 + '|s=' + #a3 + '|min=' + #a0 + '|max=' + #a1"
+            key = "'price|p=' + #a2 + '|s=' + #a3 + '|o=' + #a4 + '|min=' + #a0 + '|max=' + #a1"
     )
-    public Page<Product> byPrice(BigDecimal min, BigDecimal max, Integer page, Integer size) {
+    public Page<Product> byPrice(BigDecimal min, BigDecimal max, Integer page, Integer size, Boolean ordered) {
         PageRequest pr = PageRequest.of(page, size);
-        return repo.findByPriceBetween(min, max, pr);
+        return ordered ? repo.findByPriceBetweenOrderByPriceDesc(min, max, pr) : repo.findByPriceBetween(min, max, pr);
     }
 
 

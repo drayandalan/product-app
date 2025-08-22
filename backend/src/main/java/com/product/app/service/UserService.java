@@ -1,6 +1,7 @@
 package com.product.app.service;
 
 import com.product.app.entity.UserAccount;
+import com.product.app.enums.RoleEnum;
 import com.product.app.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class UserService {
         UserAccount u = new UserAccount();
         u.setUsername(username);
         u.setPasswordHash(encoder.encode(rawPassword));
+        u.setRole(RoleEnum.USER.name());
         return users.save(u);
     }
 

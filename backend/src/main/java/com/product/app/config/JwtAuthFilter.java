@@ -34,13 +34,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String token = h.substring(7);
             try {
                 String username = jwt.validateAndGetUsername(token);
-                var u = users.findByUsername(username).orElse(null);
-                if (u == null) {
+                String role = jwt.getRole(token);
+                if (role == null) {
                     res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     return;
                 }
                 var auth = new UsernamePasswordAuthenticationToken(
-                        username, null, List.of(new SimpleGrantedAuthority("ROLE_" + u.getRole()))
+                        username, null, List.of(new SimpleGrantedAuthority("ROLE_" + role))
                 );
 
                 SecurityContextHolder.getContext().setAuthentication(auth);

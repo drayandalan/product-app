@@ -1,17 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom'
-import { AuthProvider, useAuth } from './auth/AuthContext'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import ProductsPage from './pages/ProductsPage'
-
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { AuthProvider, useAuth } from './auth/AuthContext';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ProductsPage from './pages/ProductsPage';
 
 function Guard({ children }: { children: JSX.Element }) {
     const { token } = useAuth();
     return token ? children : <Navigate to="/login" />;
 }
-
 
 function Nav() {
     const { token, logout } = useAuth();
@@ -23,7 +21,6 @@ function Nav() {
         </nav>
     );
 }
-
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -38,4 +35,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             </BrowserRouter>
         </AuthProvider>
     </React.StrictMode>
-)
+);
+
+export { };

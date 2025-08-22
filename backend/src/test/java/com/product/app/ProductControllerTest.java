@@ -60,23 +60,26 @@ class ProductControllerWebMvcTest {
         var page = new PageImpl<>(List.of(makeProduct(1L, "Pen", 1.5)),
                 PageRequest.of(0, 10), 1);
 
-        Mockito.when(productService.list(eq("Pen"), anyInt(), anyInt()))
+        Mockito.when(productService.list(eq("Pen"), anyInt(), anyInt(), eq(Boolean.FALSE)))
                 .thenReturn(page);
 
         // with name
         mvc.perform(get("/api/products")
                         .param("name", "Pen")
                         .param("page", "0")
-                        .param("size", "10"))
+                        .param("size", "10")
+                        .param("ordered", "false"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].name").value("Pen"));
 
         // without name (also cover the other branch)
-        Mockito.when(productService.list(isNull(), anyInt(), anyInt()))
+        Mockito.when(productService.list(isNull(), anyInt(), anyInt(), eq(Boolean.FALSE)))
                 .thenReturn(page);
 
         mvc.perform(get("/api/products")
-                        .param("page", "0").param("size", "10"))
+                        .param("page", "0")
+                        .param("size", "10")
+                        .param("ordered", "false"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].id").value(1));
     }
@@ -88,7 +91,7 @@ class ProductControllerWebMvcTest {
                 PageRequest.of(0, 10), 1);
         Mockito.when(productService.byPrice(eq(BigDecimal.valueOf(1)),
                         eq(BigDecimal.valueOf(10)),
-                        anyInt(), anyInt()))
+                        anyInt(), anyInt(), eq(Boolean.FALSE)))
                 .thenReturn(page);
 
         mvc.perform(get("/api/products/search")
