@@ -23,16 +23,18 @@ public class ProductController {
     @GetMapping
     public Page<Product> list(@RequestParam(name = "name", required = false) String name,
                               @RequestParam(name = "page", defaultValue = "0") Integer page,
-                              @RequestParam(name = "size", defaultValue = "10") Integer size) {
-        return service.list(name, page, size);
+                              @RequestParam(name = "size", defaultValue = "10") Integer size,
+                              @RequestParam(name = "ordered", defaultValue = "false") Boolean ordered) {
+        return service.list(name, page, size, ordered);
     }
 
     @GetMapping("/search")
     public Page<Product> byPrice(@RequestParam(name = "min", defaultValue = "0") BigDecimal min,
                                  @RequestParam(name = "max", defaultValue = "9999999") BigDecimal max,
                                  @RequestParam(name = "page", defaultValue = "0") Integer page,
-                                 @RequestParam(name = "size", defaultValue = "10") Integer size) {
-        return service.byPrice(min, max, page, size);
+                                 @RequestParam(name = "size", defaultValue = "10") Integer size,
+                                 @RequestParam(name = "ordered", defaultValue = "false") Boolean ordered) {
+        return service.byPrice(min, max, page, size, ordered);
     }
 
     @PostMapping
