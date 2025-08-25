@@ -3,7 +3,7 @@ package com.product.app;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.product.app.config.JwtAuthFilter;
 import com.product.app.controller.AuthController;
-import com.product.app.dto.AuthDTO.*; // or your DTOs package; see notes below
+import com.product.app.dto.AuthDTO.*;
 import com.product.app.entity.UserAccount;
 import com.product.app.service.JwtService;
 import com.product.app.service.UserService;
